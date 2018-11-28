@@ -21,7 +21,7 @@ Copyright 2018 - The LineageOS Project.
 Steps to Compile:
 repo init --depth=1 -u https://github.com/omnirom/android.git -b android-9.0
 
-Some of the below snipped from @mauronofrio
+Some of the below snipped from [@mauronofrio](https://github.com/mauronofrio)
 ```
 Then add these string to .repo/manifests/remove.xml
 
