@@ -32,7 +32,7 @@ Then add these string to .repo/manifests/remove.xml
 Then add these projects to .repo/local_manifests/roomservice.xml (If you don't have it, you can add them to .repo/manifest.xml): 
 
 ```xml
-<project name="mauronofrio/android_device_oneplus_fajita" path="device/oneplus/fajita" remote="github" revision="android-9.0" />
+<project name="Dameon87/android_device_oneplus_fajita" path="device/oneplus/fajita" remote="github" revision="android-9.0" />
 <project name="android_bootable_recovery" path="bootable/recovery" remote="omnirom" revision="android-9.0" />
 <project name="android_external_busybox" path="external/busybox" remote="TeamWin" revision="android-9.0" />
 ```
