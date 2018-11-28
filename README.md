@@ -25,7 +25,6 @@ Some of the below snipped from [@mauronofrio](https://github.com/mauronofrio)
 ```
 Then add these string to .repo/manifests/remove.xml
 
-```
 <remove-project name="platform/bootable/recovery" />
 ```
 
