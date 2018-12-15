@@ -58,18 +58,18 @@ QCOM_BOARD_PLATFORMS += sdm845
 
 # Partitions
 BOARD_FLASH_BLOCK_SIZE := 262144
-
-BOARD_BOOTIMAGE_PARTITION_SIZE := 67108864
-BOARD_RECOVERYIMAGE_PARTITION_SIZE := 67108864
-BOARD_SYSTEMIMAGE_PARTITION_SIZE := 2998927360
-# userdata.img
+# boot.img 67108864
+BOARD_BOOTIMAGE_PARTITION_SIZE := 0x4000000
+# system.img 2998927360
+BOARD_SYSTEMIMAGE_PARTITION_SIZE := 0xB2C00000
+BOARD_SYSTEMIMAGE_JOURNAL_SIZE := 0
+BOARD_SYSTEMIMAGE_EXTFS_INODE_COUNT := 4096
+# userdata.img 118112366592
 TARGET_USERIMAGES_USE_EXT4 := true
-BOARD_USERDATAIMAGE_PARTITION_SIZE := 118112366592
-#BOARD_USERDATAIMAGE_FILE_SYSTEM_TYPE := f2fs
-#BOARD_USERDATAIMAGE_PARTITION_SIZE := 118112366592
-BOARD_USERDATAIMAGE_FILE_SYSTEM_TYPE := ext4
-BOARD_VENDORIMAGE_PARTITION_SIZE := 1073741824
-TARGET_USERIMAGES_USE_EXT4 := true
+BOARD_USERDATAIMAGE_PARTITION_SIZE := 0x1B800BB000
+BOARD_USERDATAIMAGE_FILE_SYSTEM_TYPE := f2fs
+# vendor.img 1073741824
+BOARD_VENDORIMAGE_PARTITION_SIZE := 0x40000000
 TARGET_USERIMAGES_USE_F2FS := true
 
 TARGET_NO_KERNEL := false
@@ -99,33 +99,38 @@ BOARD_HAS_NO_SELECT_BUTTON := true
 BOARD_HAS_NO_REAL_SDCARD := true
 RECOVERY_SDCARD_ON_DATA := true
 TARGET_RECOVERY_QCOM_RTC_FIX := true
-TW_BRIGHTNESS_PATH := "/sys/class/leds/lcd-backlight/brightness"
+
+TW_BRIGHTNESS_PATH := "/sys/class/backlight/pane10-backlight/brightness"
 TW_EXCLUDE_DEFAULT_USB_INIT := true
 TW_EXCLUDE_SUPERSU := true
 TW_EXTRA_LANGUAGES := true
 TW_INCLUDE_NTFS_3G := true
 AB_OTA_UPDATER := true
-BOARD_BUILD_SYSTEM_ROOT_IMAGE := true
 TW_INPUT_BLACKLIST := "hbtp_vm"
-TW_MAX_BRIGHTNESS := 1023
+TW_MAX_BRIGHTNESS := 940
 TW_THEME := portrait_hdpi
 TARGET_RECOVERY_DEVICE_MODULES += android.hardware.boot@1.0
-#TW_RECOVERY_ADDITIONAL_RELINK_FILES := ${OUT}/system/lib64/android.hardware.boot@1.0.so
+TARGET_USE_CUSTOM_LUN_FILE_PATH := /config/usb_gadget/g1/functions/mass_storage.0/lun.%d/file
 TARGET_RECOVERY_PIXEL_FORMAT := BGRA_8888
 TW_NO_SCREEN_BLANK := true
 TW_USE_TOOLBOX := true
+TW_NO_LEGACY_PROPS := true
 
 # Use mke2fs to create ext4 images
 TARGET_USES_MKE2FS := true
 
+#Hide notch
+#TARGET_RECOVERY_UI_MARGIN_HEIGHT := 140
+
 # A/B updater updatable partitions list. Keep in sync with the partition list
 # with "_a" and "_b" variants in the device. Note that the vendor can add more
 # more partitions to this list for the bootloader and radio.
-#AB_OTA_PARTITIONS += \
-#    boot \
-#    system 
-#    vendor \
-#    vbmeta
+AB_OTA_PARTITIONS += \
+    boot \
+    system \
+    vendor \
+    vbmeta \
+    dtbo 
 
 # Encryption
 # Custom Platform Version and Security Patch
@@ -140,3 +145,8 @@ TW_INCLUDE_CRYPTO_FBE := true
 BOARD_SUPPRESS_SECURE_ERASE := true
 TW_USE_LEDS_HAPTICS := true
 
+# TWRP Debug Flags
+#TWRP_EVENT_LOGGING := true
+TARGET_USES_LOGD := true
+TWRP_INCLUDE_LOGCAT := true
+TW_EXCLUDE_TWRPAPP := true
